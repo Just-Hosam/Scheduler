@@ -5,10 +5,22 @@ import { action } from "@storybook/addon-actions";
 
 import "index.scss";
 
+// Button Components
 import Button from "components/Button";
+// DayList Components
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
+// InterviewList Components
 import InterviewerListItem from "components/InterviewerListItem";
+import InterviewerList from "components/InterviewerList";
+// Appointment Components
+import Appointment from "components/Appoinement/index";
+import Header from "components/Appoinement/Header";
+import Empty from "components/Appoinement/Empty";
+import Show from "components/Appoinement/Show";
+import Confirm from "components/Appoinement/Confirm";
+import Status from "components/Appoinement/Status";
+import Error from "components/Appoinement/Error";
 
 storiesOf("Button", module)
   .addParameters({
@@ -96,6 +108,62 @@ storiesOf("InterviewerListItem", module)
       id={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
-      setInterviewer={action("setInterviewer")}
+      setInterviewer={event => action("setInterviewer")(interviewer.id)}
     />
   ));
+
+const interviewers = [
+  { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
+  { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
+  { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
+  { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
+  { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
+];
+
+storiesOf("InterviewerList", module)
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+  })
+  .add("Initial", () => (
+    <InterviewerList
+      interviewers={interviewers}
+      onChange={action("onChange")}
+    />
+  ))
+  .add("Preselected", () => (
+    <InterviewerList
+      interviewers={interviewers}
+      value={3}
+      onChange={action("onChange")}
+    />
+  ));
+
+  storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  .add("Header", () => <Header time='12pm' />)
+  .add('Empty', () => <Empty onAdd={action('onAdd')} />)
+  .add('Show', () => {
+    return (
+      <Show 
+        student='Hosam Dahrooge' 
+        interviewer={interviewers[0]} 
+        onEdit={action('onEdit')} 
+        onDelete={action('onDelete')} 
+      />
+    );
+  })
+  .add('Confirm', () => {
+    return (
+      <Confirm 
+        message='Are you sure?' 
+        onCancel={action('onCancel')} 
+        onConfirm={action('onConfirm')}
+      />
+    );
+  })
+  .add('Status', () => <Status message='Loading' />)
+  .add('Error', () => <Error message='Could not delete.' onClose={action('onClose')} />);
