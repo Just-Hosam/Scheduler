@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from 'react'
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -21,6 +21,7 @@ import Show from "components/Appoinement/Show";
 import Confirm from "components/Appoinement/Confirm";
 import Status from "components/Appoinement/Status";
 import Error from "components/Appoinement/Error";
+import Form from "components/Appoinement/Form";
 
 storiesOf("Button", module)
   .addParameters({
@@ -166,4 +167,44 @@ storiesOf("InterviewerList", module)
     );
   })
   .add('Status', () => <Status message='Loading' />)
-  .add('Error', () => <Error message='Could not delete.' onClose={action('onClose')} />);
+  .add('Error', () => <Error message='Could not delete.' onClose={action('onClose')} />)
+  .add('Form on Create', () => {
+    return (
+      <Form
+        interviewers={interviewers}
+        onSave={action('onSave')}
+        onCancel={action('onCancel')}
+      />
+    );
+  })
+  .add('Form on Edit', () => {
+    return (
+      <Form
+        interviewers={interviewers}
+        onSave={action('onSave')}
+        onCancel={action('onCancel')}
+        name='Hosam Dahrooge'
+        interviewer={4}
+      />
+    );
+  })
+  .add("Appointment Empty", () => {
+    return (
+      <Fragment>
+        <Appointment id={1} time="12pm" />
+        <Appointment id="last" time="1pm" />
+      </Fragment>
+    );
+  })
+  .add("Appointment Booked", () => {
+    return (
+      <Fragment>
+        <Appointment
+          id={1}
+          time="12pm"
+          interview={{ student: "Hosam Dahrooge", interviewer }}
+        />
+        <Appointment id="last" time="1pm" />
+      </Fragment>
+    );
+  });
