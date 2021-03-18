@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { getAppointmentsForDay } from '../helpers/selectors';
+import { getAppointmentsForDay, getInterview } from '../helpers/selectors';
 
 import "components/Application.scss";
 
@@ -15,8 +15,6 @@ export default function Application(props) {
     interviewers: {}
   });
 
-  const dailyAppointments = [];
-
   const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
@@ -27,16 +25,23 @@ export default function Application(props) {
     ]).then(resArr => {
       setState(prev => ({
         ...prev, 
-        days: resArr[0].data, 
-        appointments: resArr[1].data, 
-        interviewers: resArr[2].data 
+        days: resArr[0].data,
+        appointments: resArr[1].data,
+        interviewers: resArr[2].data
       }));
     });
   }, []);
-
-  dailyAppointments.push(...getAppointmentsForDay(state, state.day));
-
-  const appArr = dailyAppointments.map(appointment => <Appointment key={appointment.id} {...appointment} />);
+  
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const appArr = dailyAppointments.map(appointment => {
+    const interview = getInterview(state, appointment.interview);
+    
+    return <Appointment 
+      key={appointment.id} 
+      {...appointment} 
+      interview={interview}
+    />
+  });
   appArr.push(<Appointment key="last" time="5pm" />);
 
   return (
