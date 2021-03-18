@@ -4,3 +4,11 @@ export function getAppointmentsForDay(state, day) {
 
   return dayObj.appointments.map(appNum => state.appointments[appNum]);
 };
+
+export function getInterview(state, interview) {
+  if (!interview) return null;
+  const interviewerId = interview.interviewer;
+  const interviewerData = state.interviewers[interviewerId];
+
+  return {...interview, interviewer: interviewerData};
+};
