@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { getAppointmentsForDay, getInterview } from '../helpers/selectors';
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../helpers/selectors';
 
 import "components/Application.scss";
 
@@ -31,8 +31,20 @@ export default function Application(props) {
       }));
     });
   }, []);
-  
+
+  function bookInterview(id, interview) {
+    const appointment = { ...state.appointments[id], interview: { ...interview } };
+    const appointments = { ...state.appointments, [id]: appointment };
+
+    return axios.put(
+      `http://localhost:8001/api/appointments/${id}`,
+      { ...appointment, ...interview }
+    ).then(res => setState({ ...state, appointments }));
+  }
+
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+
   const appArr = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
     
@@ -40,6 +52,8 @@ export default function Application(props) {
       key={appointment.id} 
       {...appointment} 
       interview={interview}
+      bookInterview={bookInterview}
+      interviewers={dailyInterviewers}
     />
   });
   appArr.push(<Appointment key="last" time="5pm" />);
