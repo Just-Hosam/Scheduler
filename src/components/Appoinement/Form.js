@@ -24,7 +24,7 @@ const Form = props => {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            placeholder={props.name}
+            placeholder='Student Name'
             onChange={event => setName(event.target.value)}
             value={name}
           />
@@ -34,7 +34,7 @@ const Form = props => {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={event => props.onSave(name, interviewer)}>Save</Button>
+          <Button confirm onClick={() => props.onSave(name, interviewer, props.isNew)}>Save</Button>
         </section>
       </section>
     </main>
