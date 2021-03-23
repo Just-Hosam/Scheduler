@@ -1,21 +1,21 @@
 export function getAppointmentsForDay(state, day) {
-  const dayObj = state.days.filter(dayObj => dayObj.name === day)[0];
-  if (!dayObj) return [];
+	const dayObj = state.days.filter((dayObj) => dayObj.name === day)[0];
+	if (!dayObj) return [];
 
-  return dayObj.appointments.map(appNum => state.appointments[appNum]);
-};
+	return dayObj.appointments.map((appNum) => state.appointments[appNum]);
+}
 
 export function getInterview(state, interview) {
-  if (!interview) return null;
-  const interviewerId = interview.interviewer;
-  const interviewerData = state.interviewers[interviewerId];
+	if (!interview) return null;
+	const interviewerId = interview.interviewer;
+	const interviewerData = state.interviewers[interviewerId];
 
-  return {...interview, interviewer: interviewerData};
-};
+	return { ...interview, interviewer: interviewerData };
+}
 
 export function getInterviewersForDay(state, day) {
-  const dayObj = state.days.filter(dayObj => dayObj.name === day)[0];
-  if (!dayObj) return [];
+	const dayObj = state.days.filter((dayObj) => dayObj.name === day)[0];
+	if (!dayObj) return [];
 
-  return dayObj.interviewers.map(appNum => state.interviewers[appNum]);
-};
+	return dayObj.interviewers.map((appNum) => state.interviewers[appNum]);
+}
