@@ -12,6 +12,7 @@ import {
 	queryByText,
 	prettyDOM,
 	queryByAltText,
+	getByDisplayValue,
 } from '@testing-library/react';
 
 import Application from 'components/Application';
@@ -75,5 +76,31 @@ describe('Application', () => {
 			queryByText(day, 'Monday')
 		);
 		expect(getByText(day, '2 spots remaining')).toBeInTheDocument();
+	});
+
+	it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
+		const { container } = render(<Application />);
+		await waitForElement(() => getByText(container, 'Archie Cohen'));
+
+		const appointment = getAllByTestId(
+			container,
+			'appointment'
+		).find((appointment) => queryByText(appointment, 'Archie Cohen'));
+
+		fireEvent.click(queryByAltText(appointment, 'Edit'));
+		expect(getByDisplayValue(appointment, 'Archie Cohen')).toBeInTheDocument();
+
+		fireEvent.change(getByDisplayValue(appointment, 'Archie Cohen'), {
+			target: { value: 'Hosam Dahrooge' },
+		});
+		fireEvent.click(getByText(appointment, 'Save'));
+		expect(getByText(appointment, 'Saving!')).toBeInTheDocument();
+
+		await waitForElement(() => queryByText(appointment, 'Hosam Dahrooge'));
+
+		const day = getAllByTestId(container, 'day').find((day) =>
+			queryByText(day, 'Monday')
+		);
+		expect(getByText(day, '1 spot remaining')).toBeInTheDocument();
 	});
 });
