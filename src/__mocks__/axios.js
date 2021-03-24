@@ -88,6 +88,13 @@ export default {
 				data: fixtures.appointments['1'],
 			});
 		}
+		if (url === '/api/appointments/2') {
+			return Promise.resolve({
+				status: 204,
+				statusText: 'No Content',
+				data: fixtures.appointments['1'],
+			});
+		}
 	}),
 	delete: jest.fn((url) => {
 		if (url === '/api/appointments/2') {
