@@ -24,6 +24,7 @@ const Form = (props) => {
 		}
 
 		props.onSave(name, interviewer, props.isNew);
+		setError('');
 	}
 
 	return (
