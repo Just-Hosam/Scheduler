@@ -11,12 +11,11 @@ export default function useApplicationData() {
 
 	const setDay = (day) => setState({ ...state, day });
 
-	// TODO: double check hardcoded urls
 	useEffect(() => {
 		Promise.all([
-			axios.get('http://localhost:8001/api/days'),
-			axios.get('http://localhost:8001/api/appointments'),
-			axios.get('http://localhost:8001/api/interviewers'),
+			axios.get('/api/days'),
+			axios.get('/api/appointments'),
+			axios.get('/api/interviewers'),
 		]).then((resArr) => {
 			setState((prev) => ({
 				...prev,
@@ -40,24 +39,20 @@ export default function useApplicationData() {
 		};
 		const appointments = { ...state.appointments, [id]: appointment };
 
-		return axios
-			.put(`http://localhost:8001/api/appointments/${id}`, { ...appointment })
-			.then(() => {
-				const days = accessDaySpots(state.day, isNew ? +1 : 0);
-				setState({ ...state, appointments, days });
-			});
+		return axios.put(`/api/appointments/${id}`, { ...appointment }).then(() => {
+			const days = accessDaySpots(state.day, isNew ? +1 : 0);
+			setState({ ...state, appointments, days });
+		});
 	}
 
 	function deleteInterview(id) {
 		const appointment = { ...state.appointments[id], interview: null };
 		const appointments = { ...state.appointments, [id]: appointment };
 
-		return axios
-			.delete(`http://localhost:8001/api/appointments/${id}`)
-			.then(() => {
-				const days = accessDaySpots(state.day, -1);
-				setState({ ...state, appointments, days });
-			});
+		return axios.delete(`/api/appointments/${id}`).then(() => {
+			const days = accessDaySpots(state.day, -1);
+			setState({ ...state, appointments, days });
+		});
 	}
 
 	return {
