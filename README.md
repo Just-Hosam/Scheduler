@@ -8,7 +8,7 @@ It allows the user to book an appointment with a student's name and an interview
 
 ## Getting Started
 
-Note that the application is dependant on an another project to run the server and the database. Feel free to set it up [here](https://github.com/Just-Hosam/scheduler/blob/master/docs/Screen%20Shot%202021-03-24%20at%208.12.57%20PM.png).
+Note that the application is dependant on an another project to run the server and the database. Feel free to set it up [here](https://github.com/Just-Hosam/scheduler-api).
 
 <br>
 
