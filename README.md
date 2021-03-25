@@ -34,7 +34,7 @@ http://localhost:8000/
 
 ## Final Product
 
-!["Screenshot of Base page"](https://github.com/Just-Hosam/scheduler/blob/master/docs/Screen%20Shot%202021-03-24%20at%208.12.57%20PM.png)
+!["Screenshot of Base page"](https://github.com/Just-Hosam/scheduler/blob/master/docs/Screen%20Shot%202021-03-24%20at%209.41.55%20PM.png)
 
 ## Known Issues/Bugs
 
