@@ -1,8 +1,11 @@
 import React from 'react';
-import InterviewerListItem from 'components/InterviewerListItem';
 import PropTypes from 'prop-types';
 
+// Import Styling
 import 'components/InterviewerList.scss';
+
+// Import Components
+import InterviewerListItem from 'components/InterviewerListItem';
 
 const InterviewerList = (props) => {
 	const itemsArr = props.interviewers.map((interviewer) => {
@@ -26,6 +29,7 @@ const InterviewerList = (props) => {
 	);
 };
 
+// Checks if the interviewers is an array before exporting
 InterviewerList.propTypes = {
 	interviewers: PropTypes.array.isRequired,
 };

@@ -4,6 +4,7 @@ import {
 	getInterviewersForDay,
 } from 'helpers/selectors';
 
+// Data for testing
 const state = {
 	days: [
 		{
@@ -53,6 +54,9 @@ const state = {
 	},
 };
 
+// Describe blocks were not introduced as compass didn't start with them for this
+
+// The first 5 tests focus the getAppointmentsForDay func
 test('getAppointmentsForDay returns an array', () => {
 	const result = getAppointmentsForDay(state, 'Monday');
 	expect(Array.isArray(result)).toBe(true);
@@ -79,6 +83,7 @@ test('getAppointmentsForDay returns an empty array when the day is not found', (
 	expect(result.length).toEqual(0);
 });
 
+// The following 3 tests focus the getInterview func
 test('getInterview returns an object with the interviewer data', () => {
 	const result = getInterview(state, state.appointments['3'].interview);
 	expect(result).toEqual(
@@ -98,6 +103,7 @@ test('getInterview returns null if no interview is booked', () => {
 	expect(result).toBeNull();
 });
 
+// The last 5 tests focus the getInterviewersForDay func
 test('getInterviewersForDay returns an array', () => {
 	const result = getInterviewersForDay(state, 'Monday');
 	expect(Array.isArray(result)).toBe(true);

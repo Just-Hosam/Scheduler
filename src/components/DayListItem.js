@@ -1,9 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
+// Import Styling
 import 'components/DayListItem.scss';
 
 export default function DayListItem(props) {
+	// Assign the approppriate class based on the passed prop
 	const classes = classNames(
 		'day-list__item',
 		{ 'day-list__item--selected': props.selected },
@@ -22,6 +24,7 @@ export default function DayListItem(props) {
 	);
 }
 
+// Helper function to format the 'spots' string
 const formatSpots = (spots) => {
 	if (spots === 0) spots = 'no spots remaining';
 	if (spots === 1) spots = '1 spot remaining';

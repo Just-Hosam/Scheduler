@@ -1,9 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
+// Import Components
 import 'components/InterviewerListItem.scss';
 
 const InterviewerListItem = (props) => {
+	// Assign the approppriate class based on the passed prop
 	const listClasses = classNames('interviewers__item', {
 		'interviewers__item--selected': props.selected,
 	});

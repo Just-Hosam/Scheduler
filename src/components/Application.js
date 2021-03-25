@@ -5,13 +5,16 @@ import {
 	getInterviewersForDay,
 } from '../helpers/selectors';
 
+// Styling Import
 import 'components/Application.scss';
 
+// Import Components
 import DayList from 'components/DayList';
 import Appointment from 'components/Appoinement/index';
 import useApplicationData from 'hooks/useApplicationData';
 
 export default function Application(props) {
+	// States grouped in a custom hook
 	const {
 		state,
 		setDay,
@@ -19,6 +22,7 @@ export default function Application(props) {
 		deleteInterview,
 	} = useApplicationData();
 
+	// return arrays on interviewers and appointments for a set day
 	const dailyInterviewers = getInterviewersForDay(state, state.day);
 	const dailyAppointments = getAppointmentsForDay(state, state.day);
 

@@ -1,8 +1,9 @@
 import React from 'react';
 
+// Import Styling
 import 'components/Appoinement/styles.scss';
 
-// Components import
+// Import Components
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
@@ -28,6 +29,7 @@ const Appointment = (props) => {
 		props.interview ? SHOW : EMPTY
 	);
 
+	// Saves the input data and starts an async func to update the db
 	function save(name, interviewer, isNew) {
 		const interview = {
 			student: name,
@@ -41,6 +43,7 @@ const Appointment = (props) => {
 			.catch(() => transition(ERROR_SAVE, true));
 	}
 
+	// Deletes the interview data on confirmation and starts an async func to update the db
 	function confirm() {
 		transition(DELETING, true);
 		props
@@ -49,11 +52,13 @@ const Appointment = (props) => {
 			.catch(() => transition(ERROR_DELETE, true));
 	}
 
+	// Closes the error mode and resets back to the edit mode
 	const saveClose = () => {
 		back();
 		transition(EDIT, true);
 	};
 
+	// Based on the current mode the corresponding component is rendered
 	return (
 		<article className="appointment" data-testid="appointment">
 			<Header time={props.time} />

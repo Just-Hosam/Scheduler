@@ -26,12 +26,14 @@ export default function useApplicationData() {
 		});
 	}, []);
 
+	// Updates the 'spots' value in the DayList component based on the mode the Form is in
 	function accessDaySpots(day, action) {
 		const dayObj = { ...state.days.filter((dayObj) => dayObj.name === day)[0] };
 		dayObj.spots -= action;
 		return state.days.map((elem) => (elem.id === dayObj.id ? dayObj : elem));
 	}
 
+	// Updates the database with the new data and setState for that component
 	function bookInterview(id, interview, isNew) {
 		const appointment = {
 			...state.appointments[id],
@@ -45,6 +47,7 @@ export default function useApplicationData() {
 		});
 	}
 
+	// Updates the database with the new data and setState for that component
 	function deleteInterview(id) {
 		const appointment = { ...state.appointments[id], interview: null };
 		const appointments = { ...state.appointments, [id]: appointment };

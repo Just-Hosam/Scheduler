@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Import Components
 import Button from '../Button';
 
 const Confirm = (props) => {
