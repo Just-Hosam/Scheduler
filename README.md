@@ -36,10 +36,6 @@ http://localhost:8000/
 
 !["Screenshot of Base page"](https://github.com/Just-Hosam/scheduler/blob/master/docs/Screen%20Shot%202021-03-24%20at%209.41.55%20PM.png)
 
-## Known Issues/Bugs
-
-- Trying to save an interview without selecting an interviewer will crash the application. So I strongly advise to test the app on a day other than 'Monday', as that will still allow the user to use the other days within the app.
-
 ## Future Features
 
 - Hosting the application on Heroku
