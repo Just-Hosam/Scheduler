@@ -22,8 +22,11 @@ const Form = (props) => {
 
 	// Helper function, checks if the input was blank then shows a visual que
 	function validate() {
-		if (name === '') {
-			setError('Student name cannot be blank');
+		if (name === '' || interviewer === null) {
+			const studentError = 'Student name cannot be blank';
+			const interviewerError = 'Please select an interviewer';
+
+			setError(name ? interviewerError : studentError);
 			return;
 		}
 
