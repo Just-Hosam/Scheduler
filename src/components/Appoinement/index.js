@@ -52,12 +52,6 @@ const Appointment = (props) => {
 			.catch(() => transition(ERROR_DELETE, true));
 	}
 
-	// Closes the error mode and resets back to the edit mode
-	const saveClose = () => {
-		back();
-		transition(EDIT, true);
-	};
-
 	// Based on the current mode the corresponding component is rendered
 	return (
 		<article className="appointment" data-testid="appointment">
@@ -89,9 +83,7 @@ const Appointment = (props) => {
 				<Error message="Error Deleting!" onClose={back} />
 			)}
 			{mode === SAVING && <Status message="Saving!" />}
-			{mode === ERROR_SAVE && (
-				<Error message="Error Saving!" onClose={saveClose} />
-			)}
+			{mode === ERROR_SAVE && <Error message="Error Saving!" onClose={back} />}
 			{mode === SHOW && (
 				<Show
 					student={props.interview.student}
